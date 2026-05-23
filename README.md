@@ -1,23 +1,147 @@
-# python_projects_RC Grocery Store_webapp
-In this python project, we will build a RC Grocery Storey store management application. It will be 3 tier application,
-1. Front end: UI is written in HTML/CSS/Javascript/Bootstrap
-2. Backend: Python and Flask
-3. Database: mysql
+# 🛒 RC Grocery Management System
 
-![](homepage.JPG)
+A full-stack web application to manage grocery store orders and products — built with Python Flask, PostgreSQL, and vanilla JavaScript.
 
-### Installation Instructions
+🔗 **Live Demo:** [rc-grocery-store](https://rahulchaudhary4490-spec.github.io/rc-grocery-store/ui/index.html)
 
-Download mysql for windows: https://dev.mysql.com/downloads/installer/
+---
 
-`pip install mysql-connector-python`
+## 📸 Screenshots
 
-### Exercise 
+> Home Page — Order List  
+> Manage Products  
+> New Order Form  
 
-The RC Grocery Store management system that we built is functional but after we give it to users for use, we got following feedback. The exercise for you to address this feedback and implement these features in the application,
-1. **Products Module**: In products page that lists current products, add an edit button next to delete button that allows to edit current product
-2. **Products Module**: Implement a new form that allows you to add new UOM in the application. For example you want to add **Cubic Meter** as a new UOM as the RC Grocery Store store decided to start selling **wood** as well. This requies changing backend (python server) and front end (UI) both.
-3. **Orders Module**: When you place an order it doesn't have any validation. For example one can enter an order with empty customer name. You need to add validation for customer name and invalid item name or not specifying a quantity etc. This is only front end UI work.
-4. **Orders Module**: In new order page there is a bug. When you manually change total price of an item it doesn't change the grand total. You need to fix this issue.
-5. **Orders Module**: In the grid where orders are listed, add a view button in the last column. On clicking this button it should show you order details where individual items in that order are listed along with their price/quantity etc.
+---
 
+## 🚀 Features
+
+- 📦 Add, view, and delete products with unit and price
+- 🧾 Create new customer orders with multiple items
+- 💰 Auto-calculates total price per item and grand total
+- 📋 View all past orders on the home dashboard
+- 🌐 Fully deployed — accessible from anywhere
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Frontend | HTML, CSS, Bootstrap, JavaScript, jQuery |
+| Backend | Python, Flask, Flask-CORS |
+| Database | PostgreSQL (Render) |
+| Deployment | Render (backend), GitHub Pages (frontend) |
+
+---
+
+## 📁 Project Structure
+
+```
+rc-grocery-store/
+│
+├── backend/
+│   ├── server.py           # Flask API routes
+│   ├── sql_connection.py   # PostgreSQL connection
+│   ├── products_dao.py     # Product CRUD operations
+│   ├── orders_dao.py       # Order CRUD operations
+│   ├── uom_dao.py          # Unit of measurement
+│   └── requirements.txt    # Python dependencies
+│
+└── ui/
+    ├── index.html          # Home - Orders list
+    ├── manage-product.html # Manage products
+    ├── order.html          # New order form
+    ├── css/                # Stylesheets
+    └── js/                 # JavaScript files
+```
+
+---
+
+## ⚙️ API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/getProducts` | Get all products |
+| POST | `/insertProduct` | Add new product |
+| POST | `/deleteProduct` | Delete a product |
+| GET | `/getUOM` | Get units of measurement |
+| GET | `/getAllOrders` | Get all orders |
+| POST | `/insertOrder` | Create new order |
+
+---
+
+## 🖥️ Run Locally
+
+### Prerequisites
+- Python 3.x
+- PostgreSQL database
+
+### Steps
+
+```bash
+# Clone the repo
+git clone https://github.com/rahulchaudhary4490-spec/rc-grocery-store.git
+cd rc-grocery-store/backend
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Update sql_connection.py with your database URL
+
+# Run the server
+python server.py
+```
+
+Then open `ui/index.html` with Live Server in VS Code.
+
+---
+
+## 🗄️ Database Schema
+
+```sql
+-- Units of Measurement
+CREATE TABLE uom (uom_id SERIAL PRIMARY KEY, uom_name VARCHAR(45));
+
+-- Products
+CREATE TABLE products (
+    product_id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    uom_id INT REFERENCES uom(uom_id),
+    price_per_unit DOUBLE PRECISION
+);
+
+-- Orders
+CREATE TABLE orders (
+    order_id SERIAL PRIMARY KEY,
+    customer_name VARCHAR(100),
+    total DOUBLE PRECISION,
+    datetime TIMESTAMP
+);
+
+-- Order Details
+CREATE TABLE order_details (
+    order_details_id SERIAL PRIMARY KEY,
+    order_id INT REFERENCES orders(order_id),
+    product_id INT REFERENCES products(product_id),
+    quantity DOUBLE PRECISION,
+    total_price DOUBLE PRECISION
+);
+```
+
+---
+
+## 👨‍💻 Author
+
+**Rahul Choudhary**  
+B.Tech ECE — VIT Vellore  
+Aspiring Data Analyst  
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/rahul-choudhary-08766b359/)
+[![GitHub](https://img.shields.io/badge/GitHub-Follow-black?style=flat&logo=github)](https://github.com/rahulchaudhary4490-spec)
+
+---
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
