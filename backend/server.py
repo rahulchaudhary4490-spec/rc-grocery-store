@@ -1,6 +1,7 @@
+from datetime import datetime
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from sql_connection import get_sql_connection
-import mysql.connector
 import json
 
 import products_dao
@@ -8,6 +9,7 @@ import orders_dao
 import uom_dao
 
 app = Flask(__name__)
+CORS(app)
 
 connection = get_sql_connection()
 
@@ -64,4 +66,3 @@ def delete_product():
 if __name__ == "__main__":
     print("Starting Python Flask Server For Grocery Store Management System")
     app.run(port=5000)
-
