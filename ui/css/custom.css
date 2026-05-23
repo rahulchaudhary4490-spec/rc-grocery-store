@@ -2102,14 +2102,14 @@ form.form-inline {
 }
 
 .btn.btn-primary:hover {
-    background: #0065ff;
-    border-color: #0065ff;
+    background: #ff5722;
+    border-color: #ff5722;
 }
 
 .btn.btn-primary:focus {
     outline: none !important;
-    background: #0065ff;
-    border-color: #0065ff;
+    background: #ff5722;
+    border-color: #ff5722;
 }
 
 table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, table.dataTable thead .sorting_desc:after, table.dataTable thead .sorting_asc_disabled:after, table.dataTable thead .sorting_desc_disabled:after {
