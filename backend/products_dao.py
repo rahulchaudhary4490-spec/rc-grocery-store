@@ -37,9 +37,7 @@ def insert_new_product(connection, product):
 def delete_product(connection, product_id):
     cursor = connection.cursor()
     try:
-        # First delete from order_details (child table)
         cursor.execute("DELETE FROM order_details WHERE product_id = %s", (product_id,))
-        # Then delete from products (parent table)
         cursor.execute("DELETE FROM products WHERE product_id = %s", (product_id,))
         connection.commit()
         return product_id
